@@ -1,20 +1,7 @@
-use axum::{routing::get, Json, Router};
-use serde::Serialize;
+mod routes;
 
+use axum::{routing::get, Router};
 use std::net::SocketAddr;
-
-#[derive(Serialize)]
-struct HealthResponse {
-    status: String,
-    version: String,
-}
-
-async fn health_check() -> Json<HealthResponse> {
-    Json(HealthResponse {
-        status: "ok".to_string(),
-        version: env!("CARGO_PKG_VERSION").to_string(),
-    })
-}
 
 #[tokio::main]
 async fn main() {
@@ -22,7 +9,7 @@ async fn main() {
     tracing_subscriber::fmt::init();
 
     // build router
-    let app = Router::new().route("/", get(health_check));
+    let app = Router::new().route("/", get(routes::health::health_check));
 
     let addr = SocketAddr::from(([0, 0, 0, 0], 9000));
     tracing::info!("🚀Server listening on {}", addr);
