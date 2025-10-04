@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    ports:
+      - "9000:9000"
+    environment:
+      - RUST_LOG=info
+    volumes:
+      - ./src:/app/src
