@@ -11,10 +11,7 @@ use tower_http::{
 #[tokio::main]
 async fn main() {
     // set logging
-    tracing_subscriber::fmt()
-        .with_target(false)
-        .compact()
-        .init();
+    tracing_subscriber::fmt().with_target(true).compact().init();
 
     // build router
     let app = Router::new()
