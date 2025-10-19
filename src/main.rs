@@ -10,9 +10,6 @@ use tower_http::{
 
 #[tokio::main]
 async fn main() {
-    // set logging
-    tracing_subscriber::fmt().with_target(true).compact().init();
-
     // build router
     let app = Router::new()
         .route("/", get(routes::health::health_check))
@@ -25,7 +22,7 @@ async fn main() {
         .layer(TraceLayer::new_for_http());
 
     let addr = SocketAddr::from(([0, 0, 0, 0], 9000));
-    tracing::info!("🚀Server listening on {}", addr);
+    println!("🚀Server listening on {}", addr);
 
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
     axum::serve(listener, app).await.unwrap();
