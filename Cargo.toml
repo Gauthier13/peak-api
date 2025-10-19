@@ -6,6 +6,8 @@ edition = "2024"
 [dependencies]
 axum = "0.8.6"
 diesel = { version = "2.3.2", features = ["postgres"] }
+gpx = "0.10.0"
+postgis_diesel = "3.0.2"
 serde = { version = "1.0.228", features = ["derive"] }
 tokio = { version = "1.47.1", features = ["full"] }
 tower = "0.5.2"
